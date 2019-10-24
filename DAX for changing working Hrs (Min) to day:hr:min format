@@ -1,0 +1,32 @@
+Average Jira Issue Assigned Time =
+VAR Duration = [Average Jira Issue Assigned Time (Min)]
+VAR Days =
+    INT ( Duration / 510 )
+VAR Hours =
+    INT ( MOD ( Duration - ( Days * 510 ), 510 ) / 60 )
+VAR Minutes =
+    MOD ( Duration - ( Hours * 60 ), 510 )
+VAR D =
+    IF (
+        Days = 1,
+        CONCATENATE ( Days, " day " ),
+        IF ( Days <> 1, CONCATENATE ( Days, " days " ) )
+    )
+VAR H =
+    IF (
+        Hours = 1,
+        CONCATENATE ( Hours, " hr " ),
+        IF ( Hours <> 1, CONCATENATE ( Hours, " hrs " ) )
+    )
+VAR M =
+    IF (
+        Minutes = 1,
+        CONCATENATE ( Minutes, " min " ),
+        IF ( Minutes <> 1, CONCATENATE ( Minutes, " mins " ) )
+    )
+RETURN
+    IF (
+        [Average Jira Issue Assigned Time (Min)] > 0,
+        CONCATENATE ( D, CONCATENATE ( H, M ) )
+    )
+    
